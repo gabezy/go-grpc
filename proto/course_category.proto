@@ -1,0 +1,29 @@
+syntax = "proto3";
+// name of the package create
+package pb;
+// path of the folder that the file will be generated
+option go_package = "internal/pb";
+
+
+message Category {
+  string id = 1;
+  string name = 2;
+  string description = 3;
+}
+
+message CreateCategoryRequest {
+  string name = 1;
+  string description = 2;
+}
+
+message CategoryResponse {
+  Category category = 1;
+}
+
+// Declaration of the service and the methos (the received payload and returned response)
+service CategoryService {
+  rpc CreateCategory (CreateCategoryRequest) returns (CategoryResponse) {}
+}
+
+
+
