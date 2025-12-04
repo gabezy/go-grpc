@@ -16,13 +16,23 @@ message CreateCategoryRequest {
   string description = 2;
 }
 
-message CategoryResponse {
-  Category category = 1;
+message CategoryList {
+  repeated Category categories = 1;
+}
+
+message Blank {}
+
+message CategoryGetRequest {
+   string id = 1;
 }
 
 // Declaration of the service and the methos (the received payload and returned response)
 service CategoryService {
-  rpc CreateCategory (CreateCategoryRequest) returns (CategoryResponse) {}
+  rpc CreateCategory (CreateCategoryRequest) returns (Category) {}
+  //                       receive a data stream from the client
+  rpc CreateCategoryStream(stream CreateCategoryRequest) returns (CategoryList) {}
+  rpc ListCategory (Blank) returns (CategoryList) {}
+  rpc GetCategory (CategoryGetRequest) returns (Category) {}
 }
 
 
